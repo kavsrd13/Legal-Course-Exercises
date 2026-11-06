@@ -29,3 +29,9 @@ The owner subsequently created `kavsrd13/Legal-Course-Exercises`. The complete c
 ## Participant pre-read enhancement
 
 All ten labs now have expanded participant briefings, visible objectives, required source-reading lists, glossaries and deliverables before the tasks. The browser suite verified two-statement readiness gating for all ten labs, including entry through a numbered task URL and continuation to its requested step. All 50 task flows, exports, resets/restoration and mobile layouts passed again. Seven core tests passed, including preservation of the pre-read timestamp in backups and preservation of answers from older backups without that timestamp. Content validation checked briefing completeness for every lab. The complete participant pack is in `PARTICIPANT_PRE_READS.md`.
+
+## Law explorer and student resource cleanup
+
+Added a 15-instrument knowledge atlas with three categories, search/status filters, direct card links, inside/outside scope, official sources, related labs, two/three-card comparisons, five protection-route scenarios and three classroom memory contrasts. Ten automated data/core tests passed (seven existing plus three atlas tests). Content validation and the full browser exercise suite passed all 50 step routes and ten completion flows. The atlas browser suite passed all fifteen detail routes, filter/reset/empty states, comparison selection cap/clear, all scenarios and memory panels, related navigation, instructor-section removal and 390-pixel layouts. Desktop/mobile screenshots were inspected. No new network services or learner-data storage were introduced.
+
+The two requested instructor documents and their public download section were removed, along with guide-generation code that would recreate the removed document. Existing student lab explanations and self-checks remain.

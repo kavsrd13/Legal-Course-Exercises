@@ -29,6 +29,6 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){
   const target=match[1].split('?')[0];if(!/^(?:https?:|data:)/.test(target))assert(fs.existsSync(path.join(root,target)),'Missing asset '+target);
 }
-for(const file of ['assets/app.js','assets/core.js','assets/course-data.js','assets/briefings.js']) new vm.Script(fs.readFileSync(path.join(root,file),'utf8'),{filename:file});
-for(const file of ['docs/LEARNER_GUIDE.md','docs/FACILITATOR_GUIDE.md','docs/LAB4_REVIEW.md','docs/SOURCES.md'])assert(fs.existsSync(path.join(root,file)),'Missing linked resource '+file);
+for(const file of ['assets/app.js','assets/core.js','assets/course-data.js','assets/briefings.js','assets/law-data.js','assets/knowledge.js']) new vm.Script(fs.readFileSync(path.join(root,file),'utf8'),{filename:file});
+for(const file of ['docs/LEARNER_GUIDE.md','docs/SOURCES.md'])assert(fs.existsSync(path.join(root,file)),'Missing linked resource '+file);
 console.log('Validated 10 labs, 50 steps, 30 questions, unique answer keys, timing, source references, local assets and JavaScript syntax.');

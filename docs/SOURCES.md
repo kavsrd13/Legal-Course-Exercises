@@ -7,7 +7,7 @@
 - Master Teaching & Content-Development Plan — 5-Day / 40-Hour Programme (22-page PDF).
 - Lab 4 documentation and configuration: README, package.json, index.html, metadata.json and vite.config.ts. The original React src and the ZIP interface were not executed or verified.
 
-The new studio adapts the master exercise case facts and uses Meridian as the recurring legal-adviser context. Lab 3 and the source packs/clause extracts were expanded for hands-on verification. Lab 4 retains its documented five-question structure with the changes described in LAB4_REVIEW.md. This is a replacement codebase, not a verified reproduction of unseen source files.
+The new studio adapts the master exercise case facts and uses Meridian as the recurring legal-adviser context. Lab 3 and the source packs/clause extracts were expanded for hands-on verification. Lab 4 retains its documented five-question structure with expanded verification, risk allocation and policy tasks. This is a replacement codebase, not a verified reproduction of unseen source files.
 
 ## Official research starting points
 

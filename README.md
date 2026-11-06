@@ -43,7 +43,7 @@ Run the included validation commands before future updates. Pages uses branch-ro
 
 Progress is local to the current browser profile; students export Markdown and submit via the instructor's chosen channel. JSON backups can be restored after confirmation. There is no backend, authentication, analytics, central gradebook, real AI integration, live legal assessment or competence certification. The teacher discussion themes and quiz logic are public.
 
-The sample Lab 4 was assessed from readable documentation/configuration. Its React `src` was unavailable for execution; this is a documented replacement rather than a verified patch to the original interface. See `docs/LAB4_REVIEW.md`.
+The sample Lab 4 was assessed from readable documentation/configuration. Its React `src` was unavailable for execution; this is a documented replacement rather than a verified patch to the original interface.
 
 ## Maintain and validate
 
@@ -52,7 +52,7 @@ The sample Lab 4 was assessed from readable documentation/configuration. Its Rea
 - `assets/core.js`: validation, data cleaning, completion, scoring and exports.
 - `assets/app.js`: interface, navigation, local saving and import/export.
 - `assets/styles.css`: responsive and print styles.
-- `docs/`: learner, facilitator, source and redesign guidance.
+- `docs/`: learner guidance, source notes and participant pre-reads.
 
 ```powershell
 node tests/validate.cjs
@@ -60,3 +60,11 @@ node --test tests/core.test.cjs
 ```
 
 All legal materials require instructor revalidation before delivery. The exercises do not provide legal advice or authorise a regulated activity.
+
+## Law & governance knowledge atlas
+
+Open `#/knowledge` from the course overview or sidebar. Fifteen official-source summaries cover AI/data governance, seven WIPO treaty instruments and four Bhutan domestic Acts. Search and category/status filters, three-card comparisons, five asset/problem scenarios and the Rule of 3 Contrasts support study and classroom discussion. Each card has full name, Bhutan status, inside/outside scope, source links, related labs and a direct share link. Accession and entry-into-force dates are separate. Sources were checked on 6 November 2026; this is a dated classroom reference.
+
+Instructor-only downloads and their generation were removed at the owner’s request. The student-facing lab discussion themes and knowledge checks remain part of the exercises.
+
+Knowledge validation: `node tests/knowledge.test.cjs`. Optional browser checks: `node tests/knowledge-browser.cjs [absolute-playwright-module-path]`; set `LAW_TEST_URL` to check the published index.

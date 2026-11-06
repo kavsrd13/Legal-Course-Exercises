@@ -22,3 +22,7 @@ Share the individual lab link at the appropriate point in class. All published l
 Source repository: https://github.com/kavsrd13/Legal-Course-Exercises
 
 Deployment history: https://github.com/kavsrd13/Legal-Course-Exercises/actions
+
+Student knowledge atlas: https://kavsrd13.github.io/Legal-Course-Exercises/#/knowledge
+
+Shareable law-card example: https://kavsrd13.github.io/Legal-Course-Exercises/#/knowledge/paris
