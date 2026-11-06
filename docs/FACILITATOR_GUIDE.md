@@ -474,3 +474,9 @@ Direct link suffix: #/lab/transformation-capstone
 ## Boundaries
 
 Facilitator answers are indicative, not definitive legal conclusions. The interface validates field population and review markers; it does not assess drafting quality or determine compliance. Do not interpret a risk-product score as a probability of legal liability. All model-answer themes are visible to students in the published client code.
+
+## Participant orientation before every lab
+
+Allow 5–7 minutes from the daily instruction/synthesis allocation for each pre-read before the task timings. Every lab has a dedicated background, role, central decision, known facts, open questions, visible objectives, deliverables, glossary and source-reading list. The full text is in PARTICIPANT_PRE_READS.md.
+
+Ask one participant to restate the scenario, another to explain their role and another to name the deliverable. Resolve misunderstandings before asking them to confirm the readiness statements and begin. The confirmations are self-reports, not proof of comprehension. The pre-read remains available inside the lab; older saved answers are preserved.

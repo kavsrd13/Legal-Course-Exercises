@@ -25,3 +25,7 @@ The optional browser smoke script requires a separately installed Playwright pac
 ## Publication follow-up
 
 The owner subsequently created `kavsrd13/Legal-Course-Exercises`. The complete course source was uploaded through the connected GitHub integration. GitHub Pages is configured to publish from `main` and `/` (root). The original command-line access failures above describe the initial packaging environment; they do not describe the later GitHub upload. Current deployment results are recorded in the repository's Actions history. See `LINKS.md` at the repository root for the course index and ten individual lab URLs.
+
+## Participant pre-read enhancement
+
+All ten labs now have expanded participant briefings, visible objectives, required source-reading lists, glossaries and deliverables before the tasks. The browser suite verified two-statement readiness gating for all ten labs, including entry through a numbered task URL and continuation to its requested step. All 50 task flows, exports, resets/restoration and mobile layouts passed again. Seven core tests passed, including preservation of the pre-read timestamp in backups and preservation of answers from older backups without that timestamp. Content validation checked briefing completeness for every lab. The complete participant pack is in `PARTICIPANT_PRE_READS.md`.

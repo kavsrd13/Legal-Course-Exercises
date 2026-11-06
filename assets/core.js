@@ -21,13 +21,14 @@
     if (spec.type === 'weight') return /^\d{1,3}$/.test(value) && Number(value) <= 100;
     return !spec.choices || spec.choices.includes(value);
   }
-  function blank(lab) { return {answers:{}, attested:lab.steps.map(() => false), updatedAt:null}; }
+  function blank(lab) { return {answers:{}, attested:lab.steps.map(() => false), updatedAt:null, briefedAt:null}; }
   function cleanLab(lab, raw) {
     const result = blank(lab);
     if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return result;
     for (const spec of allSpecs(lab)) if (valid(spec, raw.answers?.[spec.key])) result.answers[spec.key] = raw.answers[spec.key];
     result.attested = lab.steps.map((_, i) => raw.attested?.[i] === true);
     result.updatedAt = typeof raw.updatedAt === 'string' && !Number.isNaN(Date.parse(raw.updatedAt)) ? raw.updatedAt : null;
+    result.briefedAt = typeof raw.briefedAt === 'string' && !Number.isNaN(Date.parse(raw.briefedAt)) ? raw.briefedAt : null;
     return result;
   }
   function vendorTotals(answers, id = 'vendors') {
@@ -71,7 +72,7 @@
     const lines = ['# ' + course.title, '', 'Learner alias: ' + (alias || 'Not specified'), 'Exported: ' + new Date().toISOString(), '', 'Completion records field population and learner review, not professional competence. No online submission has been made.', ''];
     for (const id of ids) {
       const lab = course.labs.find(l => l.id === id), state = cleanLab(lab, states[id]);
-      lines.push('## Lab ' + lab.number + ': ' + lab.title, '', 'Day ' + lab.day + ' · Module ' + lab.module, 'Reviewed steps: ' + progress(lab,state) + '/' + lab.steps.length, 'Knowledge check: ' + quizScore(lab,state) + '/' + lab.checks.length, '');
+      lines.push('## Lab ' + lab.number + ': ' + lab.title, '', 'Day ' + lab.day + ' · Module ' + lab.module, 'Pre-read acknowledged: ' + (state.briefedAt || 'Not yet recorded'), 'Reviewed steps: ' + progress(lab,state) + '/' + lab.steps.length, 'Knowledge check: ' + quizScore(lab,state) + '/' + lab.checks.length, '');
       lab.steps.forEach((step, i) => {
         lines.push('### ' + (i + 1) + '. ' + step.title, '', 'Status: ' + (completed(lab,state,i) ? 'Learner reviewed' : 'Draft / incomplete'), '');
         for (const f of step.fields) {

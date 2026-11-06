@@ -2,14 +2,16 @@
 
 ## Complete a workshop
 
-1. Open the direct lab link supplied by your instructor.
-2. Read the assignment and open the evidence pack. Download the fictional source pack if useful.
+1. Open the direct lab link supplied by your instructor. The participant pre-read introduces the scenario before the tasks.
+2. Read the background, your role, the decision question, learning objectives, expected outputs and glossary. Review the listed case materials and source cards. Download the pre-read or fictional source pack if useful, then confirm both readiness statements and select **Begin lab**. Allow 5–7 minutes for this orientation before the task timings.
 3. Complete the five tasks in sequence. All editable table cells in the current task are required before the task can be marked reviewed.
 4. Cite document and clause IDs. Distinguish a supplied fact, inference, assumption and legal-research question.
 5. Review your work against the source, tick the review statement, then use **Review & continue**. Editing a reviewed task returns that task to draft.
 6. Complete the three-question knowledge check at the end. Feedback supports revision; it does not certify professional competence.
 7. Compare your reasoning with the discussion themes and quality checklist.
 8. Use **Export submission** for a readable Markdown file. Send that file through the channel your instructor specifies.
+
+The **Pre-read & objectives** link remains available inside the exercise. A first-time direct link to a numbered task also shows the pre-read before opening that task. Confirmation is recorded separately for each lab and included in the JSON backup and Markdown learning record. Earlier answers and older backups remain usable; a backup without a pre-read record simply asks you to read and confirm the introduction before continuing.
 
 ## Save and restore
 

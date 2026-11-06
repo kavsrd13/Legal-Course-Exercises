@@ -11,6 +11,13 @@ const root=path.resolve(__dirname,'..'), out=path.join(root,'test-results');fs.m
   await page.locator('#search').fill('cyber');assert.equal(await page.locator('.lab-card:visible').count(),1);await page.locator('#search').fill('');
   const labs=await page.evaluate(()=>COURSE.labs.map(l=>({id:l.id,number:l.number,steps:l.steps.length})));
   for(const lab of labs){
+   await page.goto(base+'#/lab/'+lab.id+'/3');await page.locator('#briefing-title').waitFor();
+   assert.equal(await page.locator('#task').count(),0,'Tasks must wait for pre-reading');
+   assert.equal(await page.locator('#begin-lab').isEnabled(),false);
+   await page.locator('[data-brief-check]').first().check();assert.equal(await page.locator('#begin-lab').isEnabled(),false);
+   await page.locator('[data-brief-check]').last().check();await page.locator('#begin-lab').click();await page.locator('#task').waitFor();
+   assert.equal(new URL(page.url()).hash,'#/lab/'+lab.id+'/3','A direct task link must resume its requested step');
+   if(lab.number===4){await page.goto(base+'#/lab/'+lab.id);await page.locator('#briefing-title').waitFor();await page.screenshot({path:path.join(out,'lab-04-preread.png'),fullPage:true});}
    for(let s=0;s<lab.steps;s++){
     await page.goto(base+'#/lab/'+lab.id+'/'+(s+1));await page.locator('#task h2').first().waitFor();
     await page.locator('[data-action="review-next"]').click();assert.match(await page.locator('#step-errors').innerText(),/still a draft/);
@@ -40,7 +47,7 @@ const root=path.resolve(__dirname,'..'), out=path.join(root,'test-results');fs.m
   await page.locator('#import-file').setInputFiles(backup);await page.getByRole('button',{name:'Restore these labs',exact:true}).click();assert.match(await page.locator('.portfolio-item').first().innerText(),/5\/5 steps/);
   await page.goto(base+'#/lab/ip-audit/1');await page.locator('[data-key="register:0:owner"]').fill('Edited answer returns this step to draft.');await page.reload();assert.match(await page.locator('#step-count').innerText(),/4\/5 steps/);assert.equal(await page.locator('[data-key="register:0:owner"]').inputValue(),'Edited answer returns this step to draft.');
   await page.goto(base+'#/lab/not-found');assert.match(await page.locator('h1').innerText(),/unavailable/);
-  const mobile=await browser.newContext({viewport:{width:390,height:844}});const m=await mobile.newPage();await m.goto(base+'#/lab/ai-procurement/2');await m.locator('#task').waitFor();assert(await m.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),'Unexpected page-level mobile horizontal overflow');await m.screenshot({path:path.join(out,'mobile-lab.png'),fullPage:true});await mobile.close();
+  const mobile=await browser.newContext({viewport:{width:390,height:844}});const m=await mobile.newPage();await m.goto(base+'#/lab/ai-procurement/2');await m.locator('#briefing-title').waitFor();assert(await m.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),'Unexpected pre-read mobile overflow');await m.screenshot({path:path.join(out,'mobile-preread.png'),fullPage:true});await m.locator('[data-brief-check]').first().check();await m.locator('[data-brief-check]').last().check();await m.locator('#begin-lab').click();await m.locator('#task').waitFor();assert(await m.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),'Unexpected page-level mobile horizontal overflow');await m.screenshot({path:path.join(out,'mobile-lab.png'),fullPage:true});await mobile.close();
   assert.deepEqual(errors,[]);console.log('UI PASS: 50 step routes, 10 completed labs, required-field gates, browser save/reload, edit invalidation, quiz feedback, source-path assets, Markdown/JSON downloads, confirmed reset/restore, invalid route and mobile overflow.');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

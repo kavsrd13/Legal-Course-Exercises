@@ -2,6 +2,8 @@
 
 A five-day learning studio with ten guided web workshops, fictional source packs, editable decision tables, local progress, self-check quizzes and portfolio exports. Developed for a small instructor-led group of legal professionals.
 
+Each lab starts with a dedicated participant pre-read: three-paragraph scenario, role, central decision, known facts and unknowns, visible learning objectives, expected deliverables, glossary, five-step route and required source materials. First-time participants confirm two readiness statements before entering a task. Existing answers are preserved, and the pre-read can be reopened throughout the lab.
+
 ## Open locally
 
 Open `index.html` in a modern browser. No build step, package install, external font or API key is required. A local HTTP server is recommended for predictable browser storage and clipboard behaviour:
@@ -46,6 +48,7 @@ The sample Lab 4 was assessed from readable documentation/configuration. Its Rea
 ## Maintain and validate
 
 - `assets/course-data.js`: scenarios, documents, fields, quizzes, sources and rubrics.
+- `assets/briefings.js`: expanded participant pre-reading for all ten labs.
 - `assets/core.js`: validation, data cleaning, completion, scoring and exports.
 - `assets/app.js`: interface, navigation, local saving and import/export.
 - `assets/styles.css`: responsive and print styles.
