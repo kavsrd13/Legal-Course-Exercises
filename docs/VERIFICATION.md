@@ -1,4 +1,4 @@
-# Verification record
+# Initial build verification record
 
 Checked on 6 November 2026.
 
@@ -12,7 +12,7 @@ Checked on 6 November 2026.
 - Visual inspection of the course overview, the Lab 4 workbench and a 390-pixel mobile layout.
 - PowerShell parsing of the publishing script.
 
-## Not verified / incomplete
+## Limits and status at initial packaging
 
 - The original Lab 4 React application was not run: readable src files were unavailable and the original ZIP could not be materialised.
 - HTTP/localhost browser testing was blocked by the execution environment. The browser suite passed using local file URLs. Relative asset paths and hash routes were checked; the hosted project path still needs a post-deployment smoke check.
@@ -21,3 +21,7 @@ Checked on 6 November 2026.
 - The source desk is a legal-research starting point; this record does not certify current consolidated law or a compliant live transaction.
 
 The optional browser smoke script requires a separately installed Playwright package and Chrome. The primary validation and core tests use Node built-ins and need no package installation.
+
+## Publication follow-up
+
+The owner subsequently created `kavsrd13/Legal-Course-Exercises`. The complete course source was uploaded through the connected GitHub integration. GitHub Pages is configured to publish from `main` and `/` (root). The original command-line access failures above describe the initial packaging environment; they do not describe the later GitHub upload. Current deployment results are recorded in the repository's Actions history. See `LINKS.md` at the repository root for the course index and ten individual lab URLs.
