@@ -1,0 +1,22 @@
+'use strict';
+const {chromium}=require(process.argv[2]||'playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),{pathToFileURL}=require('node:url');
+const root=path.resolve(__dirname,'..'),out=path.join(root,'test-results');
+(async()=>{const chrome=process.env.PLAYWRIGHT_CHROME_EXECUTABLE||'C:/Program Files/Google/Chrome/Application/chrome.exe';const browser=await chromium.launch({...fs.existsSync(chrome)?{executablePath:chrome}:{channel:'chrome'},headless:true}),page=await browser.newPage({viewport:{width:1440,height:1000},acceptDownloads:true}),errors=[];page.on('pageerror',err=>errors.push(err.message));const base=process.env.FRONT_DOOR_TEST_URL||pathToFileURL(path.join(root,'index.html')).href;
+try{
+ await page.goto(base+'#/front-door');await page.locator('#fd-form').waitFor();assert.match(await page.locator('#fd-result').innerText(),/Needs information/);assert.equal(await page.locator('#fd-form select').count(),6);
+ await page.locator('[data-fd-load="0"]').click();assert.match(await page.locator('#fd-result').innerText(),/Zero-touch/);assert.match(await page.locator('#fd-result .fd-tracker [aria-current]').innerText(),/4\. Signature/);assert.match(await page.locator('#fd-result .fd-document').innerText(),/11\. Execution/);
+ await page.locator('[name=counterparty]').fill('<img src=x onerror=alert(1)>');assert.equal(await page.locator('#fd-result img').count(),0);assert.match(await page.locator('#fd-result').innerText(),/<img src=x/);
+ await page.locator('[name=value]').fill('100000');assert.match(await page.locator('#fd-result').innerText(),/High-risk/);assert.equal(await page.locator('#fd-result').getByText('CLASSROOM DRAFT',{exact:false}).count(),0);
+ await page.locator('[data-fd-load="1"]').click();assert.match(await page.locator('#fd-result').innerText(),/Standard legal/);
+ await page.locator('[data-fd-load="7"]').click();assert.equal(await page.locator('#fd-result > ul > li').count(),4);
+ await page.locator('[data-fd-load="0"]').click();await page.locator('[name=date]').fill('');assert.match(await page.locator('#fd-result').innerText(),/draft blocked/);assert.match(await page.locator('#fd-result .fd-tracker [aria-current]').innerText(),/2\. Legal review/);
+ await page.locator('#fd-tests').click();assert.match(await page.locator('#fd-test-status').innerText(),/23 \/ 23/);assert.equal(await page.locator('#fd-tests-body td').filter({hasText:/PASS/}).count(),23);
+ await page.locator('[data-fd-note=evidence]').fill('Participant app boundary cases checked; evidence retained.');await page.reload();await page.locator('#fd-form').waitFor();assert.match(await page.locator('[data-fd-note=evidence]').inputValue(),/boundary cases/);
+ const d=page.waitForEvent('download');await page.locator('#fd-prompt-download').click();assert.equal((await d).suggestedFilename(),'druk-bank-ai-studio-build-prompt.txt');
+ const exportEvent=page.waitForEvent('download');await page.locator('#fd-export').click();const exp=await exportEvent;await exp.saveAs(path.join(out,'front-door-submission.md'));assert.match(fs.readFileSync(path.join(out,'front-door-submission.md'),'utf8'),/boundary cases/);
+ await page.screenshot({path:path.join(out,'front-door-desktop.png'),fullPage:true});
+ await page.goto(base+'#/lab/transformation-capstone');await page.locator('#briefing-title').waitFor();assert.equal(await page.locator('main .fd-launch a').count(),1);await page.locator('main .fd-launch a').click();await page.locator('#fd-form').waitFor();
+ await page.goto(base+'#/resources');assert.equal(await page.locator('main .fd-launch a').count(),1);await page.goto(base+'#/');assert.equal(await page.locator('.lab-card').count(),10);assert.equal(await page.locator('main .fd-launch a').count(),1);
+ await page.setViewportSize({width:390,height:844});await page.goto(base+'#/front-door');await page.locator('#fd-form').waitFor();await page.locator('[data-fd-load="7"]').click();assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Mobile horizontal overflow');await page.screenshot({path:path.join(out,'front-door-mobile.png'),fullPage:true});
+ assert.deepEqual(errors,[]);console.log('PASS: initial hold; all tiers; precedence; field edits; XSS escaping; signature gate; 23 actual fixture executions; worksheet restore/export; prompt download; lab/home/resources navigation; mobile layout.');
+}finally{await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
